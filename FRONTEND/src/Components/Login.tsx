@@ -32,7 +32,7 @@ const [loading, setLoading] = useState(false)
          Cookies.set("accesstoken", res.data.data.accesstoken)
          axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.data.accesstoken}`
          toast.success(res.data.message)
-         navigate("/")
+         navigate("/chat")
          setLoading(false)
         } catch (error: any) {
             setLoading(false)
@@ -44,8 +44,8 @@ const [loading, setLoading] = useState(false)
     <div className="h-screen flex flex-col items-center justify-center bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100">
         <h1 className='text-3xl text-blue-500 py-2 px-4'>Welcome To Chat App</h1>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4">
-            <label htmlFor="name">Full Name</label>
-            <input className="rounded-md p-1 " type="text" name="name" value={user.username} onChange={handleChange} placeholder="Enter your name" />
+            <label htmlFor="name">UserName</label>
+            <input className="rounded-md p-1 " type="text" name="username" value={user.username} onChange={handleChange} placeholder="Enter your username" />
             <label htmlFor="email">Email</label>
             <input className="rounded-md p-1 " type="email" name="email" value={user.email} onChange={handleChange} placeholder="Enter your email" />
             <label htmlFor="password">Password</label>

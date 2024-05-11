@@ -3,6 +3,7 @@ import UserReducer from './Userslice'
 import Otheruser from './Otheruser'
 import MessageReducer from './Message'
 import selectedUser from './Selecteduser'
+import statusCheck from './status'
 import {
     persistReducer,
     FLUSH,
@@ -24,7 +25,8 @@ const rootreducer = combineReducers({
     user:persistReducer(persistConfig, UserReducer),
     otheruser:persistReducer(persistConfig, Otheruser),
     message:persistReducer(persistConfig, MessageReducer),
-    selecteduser:persistReducer(persistConfig, selectedUser)
+    selecteduser:persistReducer(persistConfig, selectedUser),
+    status:persistReducer(persistConfig, statusCheck)
 })
 const store = ConfigureStore({
     reducer:rootreducer,

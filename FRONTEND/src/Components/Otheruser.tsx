@@ -12,6 +12,9 @@ interface Props {
 }
 function Otheruser({user}:Props) {
 
+  const {status} = useSelector((state: any) => state.status)
+
+  console.log('status',status)
   const {user:currentuser} = useSelector((state: any) => state.user)
   const dispatch = useDispatch()
 
@@ -45,7 +48,11 @@ const getmessage = async () => {
   return (
     <>
     <div className='flex p-2 border border-fuchsia-700 cursor-pointer' onClick={handleClick}>
-            <img src={user?.avatar} alt="" className='w-10 h-10 rounded-full'/>
+    <div onClick={handleClick} className={`avatar ${currentuser.user._id&&status==='online'?'online':'offline'}`}>
+  <div onClick={handleClick} className="w-12 rounded-full">
+    <img src={user?.avatar} />
+  </div>
+</div>
             <h1 className='text-white text-2xl ml-2'>{user.username}</h1>
         </div>
     </>

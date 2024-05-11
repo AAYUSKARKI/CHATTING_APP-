@@ -1,8 +1,10 @@
 import React,{useState} from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
-import { Link } from 'react-router-dom'
+import { Link,useNavigate } from 'react-router-dom'
 const Register = () => {
+
+const navigate = useNavigate()
 
     const [user, setUser] = useState({
         name: "",
@@ -31,6 +33,7 @@ const [loading, setLoading] = useState(false)
             setLoading(true)
          const res = await axios.post("http://localhost:7000/api/v1/users/register", formData)
          toast.success(res.data.message)
+         navigate("/login")
          setLoading(false)
         } catch (error: any) {
             setLoading(false)
