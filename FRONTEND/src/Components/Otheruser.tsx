@@ -29,7 +29,7 @@ function Otheruser({user}:Props) {
 const getmessage = async () => {
   try {
     console.log('get message executing')
-      const res = await axios.post("http://localhost:7000/api/v1/chats/getmessages", {
+      const res = await axios.post("https://chat-backend-for-deploy.onrender.com/api/v1/chats/getmessages", {
           senderid: currentuser.user._id,
           receiverid: selecteduser._id
       })

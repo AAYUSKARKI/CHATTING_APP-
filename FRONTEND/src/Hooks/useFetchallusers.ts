@@ -9,7 +9,7 @@ export const useFetchallusers = () => {
 
     const fetchallusers = async () => {
         try {
-            const res = await axios.get("http://localhost:7000/api/v1/users/allusers")
+            const res = await axios.get("https://chat-backend-for-deploy.onrender.com/api/v1/users/allusers")
             console.log(res.data.data)
             dispatch(setotheruser(res.data.data))
         } catch (error) {

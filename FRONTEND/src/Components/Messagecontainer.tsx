@@ -23,7 +23,7 @@ function Messagecontainer() {
     try {
       console.log('receiver id is',selecteduser._id)
       console.log('sender id is',user.user._id)
-      const res = await axios.post("http://localhost:7000/api/v1/chats/createmessage",{
+      const res = await axios.post("https://chat-backend-for-deploy.onrender.com/api/v1/chats/createmessage",{
         message,
         senderid:user.user._id,
         receiverid:selecteduser._id

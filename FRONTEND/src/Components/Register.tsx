@@ -31,7 +31,7 @@ const [loading, setLoading] = useState(false)
         formData.append("avatar", avatar)
         try {
             setLoading(true)
-         const res = await axios.post("http://localhost:7000/api/v1/users/register", formData)
+         const res = await axios.post("https://chat-backend-for-deploy.onrender.com/api/v1/users/register", formData)
          toast.success(res.data.message)
          navigate("/login")
          setLoading(false)
