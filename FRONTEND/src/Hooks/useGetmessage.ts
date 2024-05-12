@@ -8,9 +8,9 @@ const useGetmessage =()=>{
 
     const {user} = useSelector((state: any) => state.user)
     const {selecteduser} = useSelector((state: any) => state.selecteduser)
-    const {message} = useSelector((state: any) => state.message)
+    // const {message} = useSelector((state: any) => state.message)
 
-    console.log('message from hook',message)
+    // console.log('message from hook',message)
 
 
  

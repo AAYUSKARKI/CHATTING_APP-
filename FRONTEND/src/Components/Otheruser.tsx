@@ -1,4 +1,4 @@
-
+import { useEffect } from 'react'
 import axios from 'axios'
 import { setmessage } from '../Redux/Message'
 import { useSelector, useDispatch } from 'react-redux'
@@ -28,28 +28,33 @@ function Otheruser({user}:Props) {
 
 const getmessage = async () => {
   try {
+    console.log('get message executing')
       const res = await axios.post("http://localhost:7000/api/v1/chats/getmessages", {
           senderid: currentuser.user._id,
           receiverid: selecteduser._id
       })
-      console.log('get message executed',res.data)
-      console.log(res.data.data)
+      // console.log('get message executed',res.data)
+      // console.log(res.data.data)
       dispatch(setmessage(res.data.data))
   } catch (error) {
       console.log(error)
   }
 }
+if(selecteduser){
+useEffect(()=>{
+  getmessage()
+},[selecteduser._id])
+}
 
   const handleClick=()=>{
-    getmessage()
-    console.log(user)
+    // console.log(user)
     dispatch(setselecteduser(user))
   }
   return (
     <>
     <div className='flex p-2 border border-fuchsia-700 cursor-pointer' onClick={handleClick}>
-    <div onClick={handleClick} className={`avatar ${currentuser.user._id&&status==='online'?'online':'offline'}`}>
-  <div onClick={handleClick} className="w-12 rounded-full">
+    <div  className={`avatar ${currentuser.user._id&&status==='online'?'online':'offline'}`}>
+  <div className="w-12 rounded-full">
     <img src={user?.avatar} />
   </div>
 </div>

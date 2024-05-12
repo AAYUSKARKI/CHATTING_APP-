@@ -37,7 +37,13 @@ function Messagecontainer() {
     }
   }
   return (
-    <>
+    <>{
+      selecteduser?
+    <div>
+      <div className='bg-green-700 flex justify-center items-center'>
+        <h1 className='text-white text-2xl'>{selecteduser.username}</h1>
+        <img src={selecteduser.avatar}  className=' avatar w-10 rounded-full' />
+      </div>
     <div className='bg-slate-400 h-[450px] overflow-auto w-full '>
         <Messages/>
         <form className='flex items-center justify-center sticky bottom-0' onSubmit={handleSubmit}>
@@ -45,6 +51,13 @@ function Messagecontainer() {
             <button type='submit' className='p-2 border border-fuchsia-700 text-green-400 bg-red-600'>Send</button>
         </form>
     </div>
+    </div>:
+    <>
+    <div className='flex items-center justify-center bg-slate-950 h-[400px] w-[250px] border border-red-700'>
+    <h1 className='text-3xl text-white'>WELCOME {user.user.username}</h1>
+    </div>
+    </>
+}
     </>
   )
 }

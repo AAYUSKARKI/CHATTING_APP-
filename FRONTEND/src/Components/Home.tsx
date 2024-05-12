@@ -9,11 +9,11 @@ function Home() {
   return (
     <>
 <div className='bg-slate-700'>
-    <div>
+    <div className='flex items-center justify-center'>
         <h1 className='text-3xl text-white'>WELCOME {user.user.username}</h1>
     </div>
 </div>
-<div className='flex'>
+<div className='flex items-center justify-center'>
 <Sidebar/>
 <Messagecontainer/>
 </div>
