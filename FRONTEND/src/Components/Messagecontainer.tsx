@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useSelector, useDispatch } from 'react-redux'
 import toast from 'react-hot-toast'
 import Messages from './Messages'
+import socket from '../utils/socket'
 import { setmessage } from '../Redux/Message'
 
 function Messagecontainer() {
@@ -12,8 +13,21 @@ function Messagecontainer() {
   const {user} = useSelector((state: any) => state.user)
   const {selecteduser} = useSelector((state: any) => state.selecteduser)
   const {message:messages} = useSelector((state: any) => state.message)
-  const[message,setMessage]=useState()
+  const[message,setMessage]=useState('')
+const[userTyping,setUserTyping]=useState('')
+  const[file,setFile]=useState('')
 
+  const handleFile=(e:any)=>{
+    setFile(e.target.files[0])
+  }
+
+  const handleFocus=(e:any)=>{
+    e.preventDefault()
+    socket.emit('feedback',user.user.username)
+    socket.on('typing',(data)=>{
+       setUserTyping(data)
+    })
+  }
   const handleChange=(e:any)=>{
     setMessage(e.target.value)
   }
@@ -21,15 +35,19 @@ function Messagecontainer() {
   const handleSubmit= async(e:any)=>{
     e.preventDefault()
     try {
+
+      const formdata = new FormData()
+      formdata.append('message',message)
+      formdata.append('senderid',user.user._id)
+      formdata.append('receiverid',selecteduser._id)
+      formdata.append('file',file)
+
       console.log('receiver id is',selecteduser._id)
       console.log('sender id is',user.user._id)
-      const res = await axios.post("https://chat-backend-for-deploy.onrender.com/api/v1/chats/createmessage",{
-        message,
-        senderid:user.user._id,
-        receiverid:selecteduser._id
-      })
-      console.log(res.data.data,'message sent response from server') 
+      const res = await axios.post("https://chat-backend-for-deploy.onrender.com/api/v1/chats/createmessage", formdata)
+      console.log('message sent response from server',res.data.data)
       dispatch(setmessage([...messages,res.data.data]))
+      setMessage('')
       toast.success(res.data.message)
     } catch (error: any) {
       console.log(error,'error')
@@ -42,12 +60,16 @@ function Messagecontainer() {
     <div>
       <div className='bg-green-700 flex justify-center items-center'>
         <h1 className='text-white text-2xl'>{selecteduser.username}</h1>
+        {
+          userTyping && <h1>{userTyping} is typing a message</h1>
+        }
         <img src={selecteduser.avatar}  className=' avatar w-10 rounded-full' />
       </div>
     <div className='bg-slate-400 h-[450px] overflow-auto w-full '>
         <Messages/>
         <form className='flex items-center justify-center sticky bottom-0' onSubmit={handleSubmit}>
-            <input type='text' onChange={handleChange} value={message} placeholder='message' className='p-2 border border-fuchsia-700 w-full'/>
+            <input type='file' onChange={handleFile} className='p-2 border border-fuchsia-700'/>
+            <input type='text' name='message' onFocus={handleFocus} onChange={handleChange} value={message} placeholder='message' className='p-2 border border-fuchsia-700 w-full'/>
             <button type='submit' className='p-2 border border-fuchsia-700 text-green-400 bg-red-600'>Send</button>
         </form>
     </div>
