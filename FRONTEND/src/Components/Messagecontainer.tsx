@@ -32,6 +32,8 @@ const[userTyping,setUserTyping]=useState('')
     setMessage(e.target.value)
   }
 
+  console.log(userTyping,'is the user typing')
+
   const handleSubmit= async(e:any)=>{
     e.preventDefault()
     try {
@@ -67,7 +69,7 @@ const[userTyping,setUserTyping]=useState('')
       </div>
     <div className='bg-slate-400 h-[450px] overflow-auto w-full '>
         <Messages/>
-        <form className='flex items-center justify-center sticky bottom-0' onSubmit={handleSubmit}>
+        <form className='flex flex-col items-center justify-center sticky bottom-0' onSubmit={handleSubmit}>
             <input type='file' onChange={handleFile} className='p-2 border border-fuchsia-700'/>
             <input type='text' name='message' onFocus={handleFocus} onChange={handleChange} value={message} placeholder='message' className='p-2 border border-fuchsia-700 w-full'/>
             <button type='submit' className='p-2 border border-fuchsia-700 text-green-400 bg-red-600'>Send</button>
