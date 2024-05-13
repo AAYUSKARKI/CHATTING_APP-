@@ -23,6 +23,7 @@ function Message({messages} : any) {
       <img alt="Tailwind CSS chat bubble component" src={messages.senderid===user.user._id?user.user?.avatar:selecteduser?.avatar} />
     </div>
   </div>
+  {messages.file?<div className="chat-bubble"><img src={messages.file} alt="Tailwind CSS chat bubble component"  /></div>:null}
   <div className="chat-bubble">{messages.message}</div>
 </div>
     </>
