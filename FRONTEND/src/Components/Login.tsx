@@ -47,7 +47,7 @@ const Login = () => {
 
             <div className="h-screen flex flex-col items-center justify-center bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100">
 
-                <h1 className='text-3xl text-blue-600 py-2 px-4 font-serif font-bold'>Welcome To Chat App</h1>
+                <h1 className='text-3xl text-green-500 py-2 px-4 font-serif font-bold'>Welcome To Chat App</h1>
 
                 <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4 bg-black">
 
@@ -74,8 +74,11 @@ const Login = () => {
                         onChange={handleChange}
                         placeholder="Enter your password" />
 
-
-                    <button disabled={loading} type="submit">Login</button>
+                    {
+                        loading?
+                        <span className="loading loading-spinner loading-lg flex items-center justify-center"></span>:
+                    <button disabled={loading} type="submit" className='btn btn-info'>Login</button>
+                    }
                     <p>Don`t have an account? <Link to="/">Register</Link></p>
                 </form>
             </div>
