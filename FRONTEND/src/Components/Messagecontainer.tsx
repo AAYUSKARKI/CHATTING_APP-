@@ -55,7 +55,7 @@ const[userTyping,setUserTyping]=useState('')
       console.log('message sent response from server',res.data.data)
       dispatch(setmessage([...messages,res.data.data]))
       setMessage('')
-      toast.success(res.data.message)
+      // toast.success(res.data.message)
     } catch (error: any) {
       console.log(error,'error')
       toast.error(error.message)
