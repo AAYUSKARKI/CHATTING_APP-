@@ -74,8 +74,11 @@ const Login = () => {
                         onChange={handleChange}
                         placeholder="Enter your password" />
 
-
-                    <button disabled={loading} type="submit">Login</button>
+                   {
+                    loading?
+                    <span className="loading loading-spinner loading-lg flex items-center justify-center"></span>:
+                    <button disabled={loading} type="submit" className='btn btn-info'>Login</button>
+                   }
                     <p>Don`t have an account? <Link to="/">Register</Link></p>
                 </form>
             </div>
