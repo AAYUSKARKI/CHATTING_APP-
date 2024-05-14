@@ -1,4 +1,4 @@
-import {useState} from 'react'
+import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Cookies from 'js-cookie'
@@ -15,8 +15,8 @@ const Login = () => {
     })
 
     const navigate = useNavigate()
-   
-const [loading, setLoading] = useState(false)
+
+    const [loading, setLoading] = useState(false)
     const handleChange = (e: any) => {
         setUser({ ...user, [e.target.name]: e.target.value })
     }
@@ -24,38 +24,64 @@ const [loading, setLoading] = useState(false)
     const handleSubmit = async (e: any) => {
         e.preventDefault()
         try {
+
             setLoading(true)
-         const res = await axios.post("https://chat-backend-for-deploy.onrender.com/api/v1/users/login", user)
-         console.log('data is',res.data.data)
-         dispatch(setuser(res.data.data))
-         console.log(res.data.data.accesstoken,'accesstoken')
-         Cookies.set("accesstoken", res.data.data.accesstoken)
-         axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.data.accesstoken}`
-         toast.success(res.data.message)
-         navigate("/chat")
-         setLoading(false)
-        } catch (error: any) {
+            const res = await axios.post("https://chat-backend-for-deploy.onrender.com/api/v1/users/login", user)
+            console.log('data is', res.data.data)
+            dispatch(setuser(res.data.data))
+            console.log(res.data.data.accesstoken, 'accesstoken')
+            Cookies.set("accesstoken", res.data.data.accesstoken)
+            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.data.accesstoken}`
+            toast.success(res.data.message)
+            navigate("/chat")
             setLoading(false)
-            toast.error(error.message)    
+        }
+        catch (error: any) {
+            setLoading(false)
+            toast.error(error.message)
         }
     }
-  return (
-    <>
-    <div className="h-screen flex flex-col items-center justify-center bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100">
-        <h1 className='text-3xl text-blue-500 py-2 px-4'>Welcome To Chat App</h1>
-        <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4">
-            <label htmlFor="name">UserName</label>
-            <input className="rounded-md p-1 " type="text" name="username" value={user.username} onChange={handleChange} placeholder="Enter your username" />
-            <label htmlFor="email">Email</label>
-            <input className="rounded-md p-1 " type="email" name="email" value={user.email} onChange={handleChange} placeholder="Enter your email" />
-            <label htmlFor="password">Password</label>
-            <input className="rounded-md p-1 " type='password' name="password" value={user.password} onChange={handleChange} placeholder="Enter your password" />
-            <button disabled={loading} type="submit">Login</button>
-            <p>Don`t have an account? <Link to="/register">Register</Link></p>
-        </form>
-    </div>
-    </>
-  )
+
+    return (
+        <>
+
+            <div className="h-screen flex flex-col items-center justify-center bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100">
+
+                <h1 className='text-3xl text-blue-500 py-2 px-4'>Welcome To Chat App</h1>
+
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4">
+
+                    <label htmlFor="name">UserName</label>
+                    <input
+                        className="rounded-md p-1 "
+                        type="text" name="username"
+                        value={user.username}
+                        onChange={handleChange}
+                        placeholder="Enter your username" />
+
+                    <label htmlFor="email">Email</label>
+                    <input className="rounded-md p-1 "
+                        type="email" name="email"
+                        value={user.email}
+                        onChange={handleChange}
+                        placeholder="Enter your email" />
+
+                    <label htmlFor="password">Password</label>
+                    <input className="rounded-md p-1 "
+                        type='password'
+                        name="password"
+                        value={user.password}
+                        onChange={handleChange}
+                        placeholder="Enter your password" />
+
+
+                    <button disabled={loading} type="submit">Login</button>
+                    <p>Don`t have an account? <Link to="/">Register</Link></p>
+                </form>
+            </div>
+
+        </>
+    )
 }
 
 export default Login

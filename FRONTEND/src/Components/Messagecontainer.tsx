@@ -25,9 +25,14 @@ const[userTyping,setUserTyping]=useState('')
     e.preventDefault()
     socket.emit('feedback',user.user.username)
     socket.on('typing',(data)=>{
+      console.log(data,'is the data')
        setUserTyping(data)
     })
   }
+  socket.on('typing',(data)=>{
+    console.log(data,'is the data')
+     setUserTyping(data)
+  })
   const handleChange=(e:any)=>{
     setMessage(e.target.value)
   }

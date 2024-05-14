@@ -13,7 +13,7 @@ function Home() {
         <h1 className='text-3xl text-white'>WELCOME {user.user.username}</h1>
     </div>
 </div>
-<div className='flex items-center justify-center'>
+<div className='flex items-center justify-center overflow-auto'>
 <Sidebar/>
 <Messagecontainer/>
 </div>
