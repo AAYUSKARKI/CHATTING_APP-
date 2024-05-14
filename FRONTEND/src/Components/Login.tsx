@@ -45,7 +45,8 @@ const Login = () => {
     return (
         <>
 
-            <div className="h-screen flex flex-col items-center justify-center bg-gray-400 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100">
+            <div className='flex items-center justify-center '>
+            <div className="h-screen w-[500px] flex flex-col items-center justify-center bg-slate-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100">
 
                 <h1 className='text-3xl text-green-500 py-2 px-4 font-serif font-bold'>Welcome To Chat App</h1>
 
@@ -53,21 +54,21 @@ const Login = () => {
 
                     <label htmlFor="name">UserName</label>
                     <input
-                        className="rounded-md p-1 bg-gray-400 "
+                        className="rounded-md p-1 bg-gray-300 text-black"
                         type="text" name="username"
                         value={user.username}
                         onChange={handleChange}
                         placeholder="Enter your username" />
 
                     <label htmlFor="email">Email</label>
-                    <input className="rounded-md p-1 bg-gray-400"
+                    <input className="rounded-md p-1 bg-gray-300 text-black"
                         type="email" name="email"
                         value={user.email}
                         onChange={handleChange}
                         placeholder="Enter your email" />
 
                     <label htmlFor="password">Password</label>
-                    <input className="rounded-md p-1 bg-gray-400"
+                    <input className="rounded-md p-1 bg-gray-300 text-black"
                         type='password'
                         name="password"
                         value={user.password}
@@ -82,6 +83,7 @@ const Login = () => {
                     <p>Don`t have an account? <Link to="/">Register</Link></p>
                 </form>
             </div>
+        </div>
 
         </>
     )

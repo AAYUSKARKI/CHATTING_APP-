@@ -77,11 +77,11 @@ const Register = () => {
     return (
         <>
         <div className='flex items-center justify-center '>
-            <div className="h-screen w-[540px] flex flex-col items-center justify-center bg-slate-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60">
+            <div className="h-screen w-[500px] flex flex-col items-center justify-center bg-slate-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60">
 
-                <h1 className='text-3xl text-blue-500 py-2 px-4'>Welcome To Chat App</h1>
+                <h1 className='text-3xl text-green-500 py-2 px-4'>Welcome To Chat App</h1>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4">
+                <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4 bg-black rounded-md">
 
                     <label htmlFor="name">Full Name</label>
                     <input className="rounded-md p-1 bg-white text-black "
@@ -109,9 +109,10 @@ const Register = () => {
 
                         {
                             avatarPreview ? 
+                            <><div className='flex items-center justify-center'>
                             <div className='avatar w-24 h-24 rounded-full overflow-hidden flex items-center justify-center'>
                                 <img src={avatarPreview} alt="Avatar Preview" className='w-full h-full object-cover' />
-                            </div> : null
+                            </div></div></> : null
                         }
                      <h1>Upload Avatar</h1>
                     <label htmlFor="avatar" className='cursor-pointer'>
