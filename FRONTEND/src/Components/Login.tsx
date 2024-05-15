@@ -2,12 +2,16 @@ import { useState } from 'react'
 import axios from 'axios'
 import toast from 'react-hot-toast'
 import Cookies from 'js-cookie'
-import { useDispatch } from 'react-redux'
+import { useDispatch , useSelector } from 'react-redux'
 import { setuser } from '../Redux/Userslice'
 import { Link, useNavigate } from 'react-router-dom'
+import ThemeChanger from './ThemeChanger';
 const Login = () => {
 
     const dispatch = useDispatch()
+
+    const {theme} = useSelector((state: any) => state.theme)
+
     const [user, setUser] = useState({
         username: "",
         email: "",
@@ -44,31 +48,30 @@ const Login = () => {
 
     return (
         <>
-
-            <div className='flex items-center justify-center '>
-            <div className="h-screen w-[500px] flex flex-col items-center justify-center bg-slate-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100">
-
+            <div className='h-screen flex  items-center justify-center '>
+                
+            <div className={`${theme=='light'?'bg-slate-600':'bg-slate-700'} h-screen w-[500px] flex flex-col items-center justify-center bg-slate-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100`}>
+            <div className='absolute top-0 right-0'><ThemeChanger/></div>
                 <h1 className='text-3xl text-green-500 py-2 px-4 font-serif font-bold'>Welcome To Chat App</h1>
 
-                <form onSubmit={handleSubmit} className="flex flex-col gap-4 p-4 bg-black">
+                <form onSubmit={handleSubmit}className={`${theme=='light'?'bg-white text-black':'bg-black '} flex flex-col gap-4 p-4 bg-black rounded-md`}>
 
                     <label htmlFor="name">UserName</label>
-                    <input
-                        className="rounded-md p-1 bg-gray-300 text-black"
+                    <input className={` ${theme=='light'?'text-black bg-white border-[1px] border-black':'text-white bg-black border-[1px] border-white'}rounded-md p-1`}
                         type="text" name="username"
                         value={user.username}
                         onChange={handleChange}
                         placeholder="Enter your username" />
 
                     <label htmlFor="email">Email</label>
-                    <input className="rounded-md p-1 bg-gray-300 text-black"
+                    <input className={` ${theme=='light'?'text-black bg-white border-[1px] border-black':'text-white bg-black border-[1px] border-white'}rounded-md p-1`}
                         type="email" name="email"
                         value={user.email}
                         onChange={handleChange}
                         placeholder="Enter your email" />
 
                     <label htmlFor="password">Password</label>
-                    <input className="rounded-md p-1 bg-gray-300 text-black"
+                    <input className={` ${theme=='light'?'text-black bg-white border-[1px] border-black':'text-white bg-black border-[1px] border-white'}rounded-md p-1`}
                         type='password'
                         name="password"
                         value={user.password}
@@ -80,7 +83,7 @@ const Login = () => {
                         <span className="loading loading-spinner loading-lg flex items-center justify-center"></span>:
                     <button disabled={loading} type="submit" className='btn btn-info'>Login</button>
                     }
-                    <p>Don`t have an account? <Link to="/">Register</Link></p>
+                    <p>Don`t have an account? <Link to="/" className='text-blue-500'>Register</Link></p>
                 </form>
             </div>
         </div>

@@ -1,3 +1,52 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+.theme-light {
+    @apply bg-white text-black
+}
+
+.theme-dark {
+    @apply bg-black text-white
+}
+
+.dark-input {
+    @apply bg-black text-white border-[1px] border-black
+}
+
+.light-input {
+    @apply bg-white text-black border-[1px] border-black
+}
+
+.dark-button {
+    @apply bg-black text-white
+}
+
+.light-button {
+    @apply bg-white text-black
+}
+
+.dark-button:hover {
+    @apply bg-white text-black
+}
+
+.light-button:hover {
+    @apply bg-black text-white
+}
+
+.dark-button:focus {
+    @apply bg-white text-black
+}
+
+.light-button:focus {
+    @apply bg-black text-white
+}
+
+.dark-button:active {
+    @apply bg-white text-black
+}
+
+.light-button:active {
+    @apply bg-black text-white
+}
