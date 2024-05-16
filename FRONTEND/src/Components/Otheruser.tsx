@@ -54,7 +54,7 @@ function Otheruser({ user }: Props) {
   }
   return (
     <>
-      <div className={`${theme == 'light' ? 'theme-light' : 'theme-dark'} flex p-2 border border-slate-700 cursor-pointer overflow-hidden`} onClick={handleClick}>
+      <div className={`${theme == 'light' ? 'bg-white text-black' : 'theme-dark'} flex p-2 border border-slate-700 cursor-pointer overflow-hidden`} onClick={handleClick}>
         <div className={`avatar ${currentuser.user._id && status === 'online' ? 'online' : 'offline'}`}>
           <div className="w-12 rounded-full">
             <img src={user?.avatar} />
