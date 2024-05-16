@@ -4,62 +4,64 @@ import { setmessage } from '../Redux/Message'
 import { useSelector, useDispatch } from 'react-redux'
 import { setselecteduser } from '../Redux/Selecteduser'
 interface Props {
-    user:{
-      username:string
-      avatar:string
-      _id:string
-    }
+  user: {
+    username: string
+    avatar: string
+    _id: string
+  }
 }
-function Otheruser({user}:Props) {
+function Otheruser({ user }: Props) {
 
-  const {status} = useSelector((state: any) => state.status)
+  const { theme } = useSelector((state: any) => state.theme)
 
-  console.log('status',status)
-  const {user:currentuser} = useSelector((state: any) => state.user)
+  const { status } = useSelector((state: any) => state.status)
+
+  console.log('status', status)
+  const { user: currentuser } = useSelector((state: any) => state.user)
   const dispatch = useDispatch()
 
-  const {selecteduser} = useSelector((state:any)=>state.selecteduser)
-  
-  console.log(selecteduser,'is the selected user')
+  const { selecteduser } = useSelector((state: any) => state.selecteduser)
 
-  console.log(currentuser.user._id,'is the current user')
+  console.log(selecteduser, 'is the selected user')
 
-//testing fetching all messages
+  console.log(currentuser.user._id, 'is the current user')
 
-const getmessage = async () => {
-  try {
-    console.log('get message executing')
+  //testing fetching all messages
+
+  const getmessage = async () => {
+    try {
+      console.log('get message executing')
       const res = await axios.post("https://chat-backend-for-deploy.onrender.com/api/v1/chats/getmessages", {
-          senderid: currentuser.user._id,
-          receiverid: selecteduser._id
+        senderid: currentuser.user._id,
+        receiverid: selecteduser._id
       })
       // console.log('get message executed',res.data)
       // console.log(res.data.data)
       dispatch(setmessage(res.data.data))
-  } catch (error) {
+    } catch (error) {
       console.log(error)
+    }
   }
-}
-if(selecteduser){
-useEffect(()=>{
-  getmessage()
-},[selecteduser._id])
-}
+  if (selecteduser) {
+    useEffect(() => {
+      getmessage()
+    }, [selecteduser._id])
+  }
 
-  const handleClick=()=>{
+  const handleClick = () => {
     // console.log(user)
     dispatch(setselecteduser(user))
   }
   return (
     <>
-    <div className='flex p-2 border border-fuchsia-700 cursor-pointer' onClick={handleClick}>
-    <div  className={`avatar ${currentuser.user._id&&status==='online'?'online':'offline'}`}>
-  <div className="w-12 rounded-full">
-    <img src={user?.avatar} />
-  </div>
-</div>
-            <h1 className='text-white text-2xl ml-2'>{user.username}</h1>
+      <div className={`${theme == 'light' ? 'theme-light' : 'theme-dark'} flex p-2 border border-slate-700 cursor-pointer overflow-hidden`} onClick={handleClick}>
+        <div className={`avatar ${currentuser.user._id && status === 'online' ? 'online' : 'offline'}`}>
+          <div className="w-12 rounded-full">
+            <img src={user?.avatar} />
+          </div>
         </div>
+        <h1 className='text-white text-2xl ml-2'>{user.username}</h1>
+      </div>
     </>
   )
 }
